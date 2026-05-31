@@ -4,6 +4,10 @@ A clean, modern, and minimal Waybar configuration with custom helper modules.
 
 ![Waybar Preview](images/image.png)
 
+## Preview with wallpaper
+
+![Waybar Preview](images/desktop.png)
+
 ## Main Highlights
 
 - **Todo Module**: A custom Rofi-based task tracker integrated into Waybar.
