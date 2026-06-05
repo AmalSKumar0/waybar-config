@@ -60,8 +60,8 @@ This will kill any running Waybar or Swaync instance and launch them in the back
 
 ## Power saving mode & Notifications Detail
 
-![Waybar Preview](images/powersaving.png)
-![Waybar Preview](images/normal.png)
+![Waybar Preview](images/power.png)
+![Waybar Preview](images/nommode.png)
 
 The battery status is displayed using a unified custom module (`custom/battery`):
 - **Dynamic Leaf Icon**: When the laptop is placed in `power-saver` mode, the standard battery status icon is automatically replaced by a green leaf icon (``).
