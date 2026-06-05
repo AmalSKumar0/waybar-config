@@ -12,6 +12,7 @@ A clean, modern, and minimal Waybar configuration with custom helper modules.
 
 - **Todo Module**: A custom Rofi-based task tracker integrated into Waybar.
 - **Daemons Monitor**: A python-based systemd running services monitor displaying active system and user services.
+- **Battery Monitor Daemon**: A background python daemon displaying notifications and custom-themed Rofi alerts on charging and low battery events.
 
 ---
 
@@ -46,7 +47,19 @@ This will kill any running Waybar or Swaync instance and launch them in the back
 
 ## Included Scripts Overview
 
-- `launch.sh` — Startup script to launch Waybar and Swaync.
+- `launch.sh` — Startup script to launch Waybar, Swaync, and the battery monitor daemon.
 - `scripts/daemons.py` — Python script used by `custom/daemons` to gather systemd services status.
 - `scripts/todo/todo.sh` — Script for the main `custom/todo` text updates and click events.
 - `scripts/todo/todo_popup.sh` — Rofi-popup task manager script.
+- `scripts/battery_monitor.py` — Python background daemon that monitors battery level and status.
+- `scripts/battery_rofi.rasi` — Transparent Rofi theme for battery alert overlays.
+
+---
+
+## Battery Monitor & Notifications Detail
+
+The background daemon `scripts/battery_monitor.py` is executed by `launch.sh` on startup and checks the battery status every 5 seconds. It triggers alerts under the following conditions:
+
+- **Charger Connected**: Sends a desktop notification and opens a transparent Rofi overlay: `  Charging: X%` (auto-closes after 3 seconds).
+- **Low Battery (≤30%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Low: X%` (auto-closes after 5 seconds).
+- **Critical Battery (≤15%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Critical: X%` (auto-closes after 5 seconds).
