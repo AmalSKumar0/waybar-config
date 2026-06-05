@@ -1,6 +1,6 @@
 /* battery_rofi.rasi - Minimal Purple & Black Accent Battery Notification */
 * {
-    bg0:    rgba ( 0, 0, 0, 0 % );  /* Transparent background */
+    bg0:    rgba ( 25, 12, 38, 95 % );  /* Dark purple/black background */
     bg1:    rgba ( 43, 16, 68, 100 % ); /* Purple accent */
     fg:     rgba ( 255, 255, 255, 100 % );
     accent: rgba ( 199, 125, 255, 100 % ); /* Light purple */
