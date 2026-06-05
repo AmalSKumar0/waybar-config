@@ -52,24 +52,32 @@ This will kill any running Waybar or Swaync instance and launch them in the back
 - `scripts/todo/todo.sh` — Script for the main `custom/todo` text updates and click events.
 - `scripts/todo/todo_popup.sh` — Rofi-popup task manager script.
 - `scripts/battery_monitor.py` — Python background daemon that monitors battery level and status.
+- `scripts/battery_custom.py` — Python script for custom battery indicator and power-saver status.
 - `scripts/toggle_power_saver.sh` — Shell script to toggle system power saving mode.
 - `scripts/battery_rofi.rasi` — Transparent Rofi theme for battery alert overlays.
 
 ---
 
-## Battery Monitor & Notifications Detail
+## Power saving mode & Notifications Detail
 
-![Waybar Preview](images/charging.png)
+![Waybar Preview](images/powersaving.png)
+![Waybar Preview](images/normal.png)
 
-The battery module in Waybar is integrated with a quick toggle script:
-- **Clicking the Battery Percentage**: Executes `scripts/toggle_power_saver.sh` which toggles the system power profile between `balanced` and `power-saver` using `powerprofilesctl`. It displays a temporary, 2-second Rofi overlay (`Balanced Mode Active` or `Power Saver Active`) and sends a desktop notification.
-- **Power Saver Logo Status**: When `power-saver` mode is active, a green leaf icon (``) appears next to the battery module in Waybar. Tapping this icon also toggles power saver mode. The logo updates instantly on click using custom signaling (SIGRTMIN+8).
+The battery status is displayed using a unified custom module (`custom/battery`):
+- **Dynamic Leaf Icon**: When the laptop is placed in `power-saver` mode, the standard battery status icon is automatically replaced by a green leaf icon (``).
+- **Toggle Power Saver**: Clicking the battery percentage (or leaf icon) in Waybar executes `scripts/toggle_power_saver.sh`, which toggles between `balanced` and `power-saver` profiles. The changes reflect instantly on the bar via custom signaling (`SIGRTMIN+8`). It also triggers a 2-second Rofi screen alert and a desktop notification.
 
 ### What does Power Saving Mode (`power-saver`) do?
 Under `power-profiles-daemon`, the `power-saver` profile optimizes system battery life by adjusting the following kernel and hardware parameters:
 1. **CPU Energy Performance Preference (EPP)**: Biases CPU drivers (like `amd_pstate` or `intel_pstate`) toward energy savings (sets EPP to `power` or `power_saver`), which caps peak CPU clock speeds and reduces voltage scaling.
 2. **Platform Thermal Profile**: Signals ACPI/UEFI firmware to restrict thermal design power (TDP) limits, resulting in a cooler, quieter laptop with less active cooling power consumption.
 3. **Aggressive Low Power States**: Speeds up device transition into idle/deep sleep modes for connected PCI/SATA link interfaces.
+
+---
+
+## Battery Monitor & Notifications Detail
+
+![Waybar Preview](images/charging.png)
 
 Additionally, the background daemon `scripts/battery_monitor.py` is executed by `launch.sh` on startup and checks the battery status every 5 seconds. It triggers alerts under the following conditions:
 
