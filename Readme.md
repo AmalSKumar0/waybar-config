@@ -82,6 +82,6 @@ Under `power-profiles-daemon`, the `power-saver` profile optimizes system batter
 Additionally, the background daemon `scripts/battery_monitor.py` is executed by `launch.sh` on startup and checks the battery status every 5 seconds. It triggers alerts under the following conditions:
 
 - **Charger Connected**: Sends a desktop notification and opens a transparent Rofi overlay: `  Charging: X%` (auto-closes after 3 seconds).
-- **Low Battery (≤30%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Low: X%` (auto-closes after 5 seconds).
-- **Critical Battery (≤15%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Critical: X%` (auto-closes after 5 seconds).
+- **Low Battery (≤30%)**: Opens a Rofi warning overlay: `  Battery Low: X%` (auto-closes after 5 seconds).
+- **Critical Battery (≤15%)**: Opens a Rofi warning overlay: `  Battery Critical: X%` (auto-closes after 5 seconds).
 

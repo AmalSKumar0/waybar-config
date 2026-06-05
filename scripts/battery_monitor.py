@@ -141,13 +141,6 @@ def main():
             if not charging:
                 if capacity <= CRITICAL_THRESHOLD:
                     if not critical_warning_sent:
-                        # Send desktop notification
-                        send_notification(
-                            title="Battery Critical!",
-                            message=f"Battery is at {capacity}%. Connect charger immediately!",
-                            urgency="critical",
-                            icon="battery-empty"
-                        )
                         # Show Rofi alert window
                         show_rofi_alert(
                             f"   <span color='#ff5555'><b>Battery Critical: {capacity}%</b></span>",
@@ -157,13 +150,6 @@ def main():
                         low_warning_sent = True # Don't trigger low warning if critical is triggered
                 elif capacity <= LOW_THRESHOLD:
                     if not low_warning_sent:
-                        # Send desktop notification
-                        send_notification(
-                            title="Battery Low",
-                            message=f"Battery is at {capacity}%. Please plug in.",
-                            urgency="critical",
-                            icon="battery-caution"
-                        )
                         # Show Rofi alert window
                         show_rofi_alert(
                             f"   <span color='#ffd166'><b>Battery Low: {capacity}%</b></span>",

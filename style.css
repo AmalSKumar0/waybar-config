@@ -13,13 +13,12 @@ window#waybar {
 }
 
 tooltip {
-    border-radius: 2px;
-    background-color: rgb(42, 14, 71);
-    border: 1px solid rgba(157, 78, 221, 0.4);
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.85); 
+    border: 2px solid rgba(165, 73, 241, 0.788); 
+    border-radius: 12px; 
     font-family: "JetBrainsMono Nerd Font";
+    padding: 10px 14px; 
 }
-
 /* --- Container Pills --- */
 .modules-left {
     background: linear-gradient(135deg, #4c0070 0%, #7b2cb1 100%);
@@ -77,7 +76,8 @@ tooltip {
 }
 
 #custom-battery.power-saver {
-    color: #06d6a0; /* Green power saver leaf */
+    color: #06d6a0;
+    /* Green power saver leaf */
 }
 
 #mpris {
