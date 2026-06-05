@@ -48,7 +48,7 @@ tooltip {
 #clock,
 #mpris,
 #network,
-#battery,
+#custom-battery,
 #tray,
 #pulseaudio,
 #cpu,
@@ -72,8 +72,12 @@ tooltip {
 #clock,
 #mpris,
 #network,
-#battery {
+#custom-battery {
     color: #ffffff;
+}
+
+#custom-battery.power-saver {
+    color: #06d6a0; /* Green power saver leaf */
 }
 
 #mpris {
@@ -83,7 +87,7 @@ tooltip {
 #clock:hover,
 #mpris:hover,
 #network:hover,
-#battery:hover {
+#custom-battery:hover {
     background: rgba(255, 255, 255, 0.12);
     border-radius: 12px;
 }
@@ -173,11 +177,11 @@ tooltip {
 }
 
 /* --- Hardware Alerts --- */
-#battery.warning {
+#custom-battery.warning {
     color: #ffd166;
 }
 
-#battery.critical {
+#custom-battery.critical {
     color: #ff5555;
     background: rgba(255, 85, 85, 0.15);
     border-radius: 12px;

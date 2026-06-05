@@ -12,7 +12,7 @@
         "clock",
         "mpris",
         "network",
-        "battery"
+        "custom/battery"
     ],
     "modules-center": [
         "hyprland/workspaces"
@@ -54,15 +54,14 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
 
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{icon}  {capacity}%",
-        "format-charging": "  {capacity}%",
-        "format-plugged": "  {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+    "custom/battery": {
+        "format": "{}",
+        "exec": "/home/amalskumar/.config/waybar/scripts/battery_custom.py",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 8,
+        "on-click": "/home/amalskumar/.config/waybar/scripts/toggle_power_saver.sh",
+        "tooltip": true
     },
 
     "hyprland/workspaces": {
