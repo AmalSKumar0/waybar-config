@@ -58,8 +58,12 @@ This will kill any running Waybar or Swaync instance and launch them in the back
 
 ## Battery Monitor & Notifications Detail
 
+![Waybar Preview](images/charging.png)
+
+
 The background daemon `scripts/battery_monitor.py` is executed by `launch.sh` on startup and checks the battery status every 5 seconds. It triggers alerts under the following conditions:
 
 - **Charger Connected**: Sends a desktop notification and opens a transparent Rofi overlay: `  Charging: X%` (auto-closes after 3 seconds).
 - **Low Battery (≤30%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Low: X%` (auto-closes after 5 seconds).
 - **Critical Battery (≤15%)**: Sends a critical desktop notification and opens a Rofi warning overlay: `  Battery Critical: X%` (auto-closes after 5 seconds).
+
