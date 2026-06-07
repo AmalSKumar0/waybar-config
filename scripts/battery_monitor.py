@@ -90,6 +90,13 @@ def show_rofi_alert(message, duration=5):
     except Exception as e:
         print(f"Failed to show rofi alert: {e}", file=sys.stderr)
 
+def get_power_profile():
+    try:
+        res = subprocess.run(['powerprofilesctl', 'get'], capture_output=True, text=True)
+        return res.stdout.strip()
+    except Exception:
+        return "balanced"
+
 def main():
     bat_path, ac_path = find_power_supply()
     if not bat_path:
@@ -101,6 +108,7 @@ def main():
     # Initial state
     capacity, status = get_battery_info(bat_path)
     prev_charging = is_charger_connected(ac_path, status)
+    prev_profile = get_power_profile()
     
     low_warning_sent = False
     critical_warning_sent = False
@@ -113,6 +121,15 @@ def main():
         try:
             capacity, status = get_battery_info(bat_path)
             charging = is_charger_connected(ac_path, status)
+            
+            # 0. Power saver brightness control
+            profile = get_power_profile()
+            if profile == "power-saver" and prev_profile != "power-saver":
+                try:
+                    subprocess.run(["brightnessctl", "set", "0"], check=True)
+                except Exception as e:
+                    print(f"Failed to set brightness to 0: {e}", file=sys.stderr)
+            prev_profile = profile
             
             # 1. Charger connected detection
             if charging and not prev_charging:

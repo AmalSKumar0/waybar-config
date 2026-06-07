@@ -31,7 +31,9 @@ if [ "$CURRENT" = "power-saver" ]; then
     show_rofi_alert "󰓅   <span color='#a2d2ff'><b>Balanced Mode Active</b></span>" 2
 else
     powerprofilesctl set power-saver
+    brightnessctl set 0
     pkill -RTMIN+8 waybar
     notify-send -u normal -t 3000 -i preferences-system-power "Power Profile" "Switched to Power Saver Mode"
     show_rofi_alert "   <span color='#06d6a0'><b>Power Saver Active</b></span>" 2
 fi
+
