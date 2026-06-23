@@ -18,10 +18,10 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "custom/todo",
         "cpu",
         "memory",
-        "temperature",
+        "custom/temperature",
+        "custom/fan",
         "pulseaudio",
         "custom/daemons",
         "tray"
@@ -83,11 +83,25 @@
         "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)"
     },
 
-    "temperature": {
-        "critical-threshold": 80,
-        "format": "  {temperatureC}°C",
-        "format-critical": "  {temperatureC}°C",
-        "tooltip": false
+    "custom/temperature": {
+        "format": "{}",
+        "exec": "/home/amalskumar/.config/waybar/scripts/temperature.py",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 9,
+        "on-click": "kitty -e htop",
+        "on-click-middle": "rm -f /tmp/waybar_temp_stats.json && pkill -RTMIN+9 waybar",
+        "tooltip": true
+    },
+
+    "custom/fan": {
+        "format": "{}",
+        "exec": "/home/amalskumar/.config/waybar/scripts/fan_control.py",
+        "return-type": "json",
+        "interval": 5,
+        "signal": 10,
+        "on-click": "/home/amalskumar/.config/waybar/scripts/toggle_fan.sh",
+        "tooltip": true
     },
 
     "pulseaudio": {

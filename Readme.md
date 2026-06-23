@@ -13,6 +13,8 @@ A clean, modern, and minimal Waybar configuration with custom helper modules.
 - **Todo Module**: A custom Rofi-based task tracker integrated into Waybar.
 - **Daemons Monitor**: A python-based systemd running services monitor displaying active system and user services.
 - **Battery Monitor Daemon**: A background python daemon displaying notifications and custom-themed Rofi alerts on charging and low battery events.
+- **Unified Hardware Thermal Monitor**: Multi-device real-time monitoring (CPU, GPU, NVMe) displaying current, min/max range, and temperature trend sparklines in a monospace comparative table.
+- **Dynamic Fan Speed & Power Profile Controller**: Real-time RPM speed display and 3-way toggle control (Quiet, Balanced, Performance) supporting `asusctl` and `powerprofilesctl` with dynamic theme color changes (green for Quiet, normal/silver for Balanced, red for Performance).
 
 ---
 
@@ -24,7 +26,8 @@ A clean, modern, and minimal Waybar configuration with custom helper modules.
 - **Battery**: Battery status with charging indicator.
 - **Hyprland Workspaces**: Shows active workspaces.
 - **CPU & Memory**: Displays CPU load and RAM/Swap usage details.
-- **Temperature**: Monitor system temperatures.
+- **Temperature / Custom Temperature**: Monitor system temperatures (CPU, GPU, NVMe) with historical trends.
+- **Custom/Fan**: Displays active fan RPM speed and active power profile. Clicking cycles performance/fan profiles.
 - **Tray**: System tray for background applications.
 - **Custom/Todo**: Tracks tasks, shows progress, and launches a task management menu on click.
 - **Custom/Daemons**: Displays running systemd services and their uptime on hover.
@@ -55,6 +58,9 @@ This will kill any running Waybar or Swaync instance and launch them in the back
 - `scripts/battery_custom.py` — Python script for custom battery indicator and power-saver status.
 - `scripts/toggle_power_saver.sh` — Shell script to toggle system power saving mode.
 - `scripts/battery_rofi.rasi` — Transparent Rofi theme for battery alert overlays.
+- `scripts/temperature.py` — Python script for CPU, GPU, NVMe temperatures, min/max history, trend sparklines, and platform profile tooltips.
+- `scripts/fan_control.py` — Python script to report active Asus fans speed (RPM) and platform profile mode.
+- `scripts/toggle_fan.sh` — Script to toggle between Quiet, Balanced, and Performance modes with notifications.
 
 ---
 
@@ -84,4 +90,16 @@ Additionally, the background daemon `scripts/battery_monitor.py` is executed by 
 - **Charger Connected**: Sends a desktop notification and opens a transparent Rofi overlay: `  Charging: X%` (auto-closes after 3 seconds).
 - **Low Battery (≤30%)**: Opens a Rofi warning overlay: `  Battery Low: X%` (auto-closes after 5 seconds).
 - **Critical Battery (≤15%)**: Opens a Rofi warning overlay: `  Battery Critical: X%` (auto-closes after 5 seconds).
+
+---
+
+## Unified Hardware Thermals & Fan Controller
+
+The configuration features a multi-device monitoring suite:
+- **Unified Comparative Table**: Monospace rendering in the hover tooltip listing `Current`, `Min`, `Max`, and `History` sparkline trend bars for **CPU**, **GPU**, and **NVMe**.
+- **Interactive 3-Way Fan Toggle**: Clicking the fan RPM icon cycles the Asus profile:
+  `Quiet (Silent)` ➔ `Balanced (Normal)` ➔ `Performance (Turbo/High)`
+  - Integrates native Asus laptop controls (`asusctl` / `asusd`) and falls back to standard kernel ACPI (`powerprofilesctl`).
+  - Colors the widget dynamically based on status: Green (Quiet), Normal/Default (Balanced), and Red (Performance).
+- **Fast Cross-Module Sync**: All modules (Battery, Temperature, and Fan) reload instantly using custom RTMIN signaling (`pkill -RTMIN+N waybar`), ensuring consistent status values across the bar.
 

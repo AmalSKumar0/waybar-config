@@ -53,6 +53,7 @@ tooltip {
 #cpu,
 #memory,
 #temperature,
+#custom-temperature,
 #custom-daemons,
 #custom-todo {
     background: transparent;
@@ -98,6 +99,8 @@ tooltip {
 #cpu,
 #memory,
 #temperature,
+#custom-temperature,
+#custom-fan,
 #custom-daemons,
 #custom-todo {
     color: #2b1044;
@@ -107,6 +110,8 @@ tooltip {
 #cpu:hover,
 #memory:hover,
 #temperature:hover,
+#custom-temperature:hover,
+#custom-fan:hover,
 #custom-daemons:hover {
     background: rgba(43, 16, 68, 0.08);
     border-radius: 12px;
@@ -177,12 +182,22 @@ tooltip {
 }
 
 /* --- Hardware Alerts --- */
-#custom-battery.warning {
+#custom-battery.warning,
+#custom-temperature.warning {
     color: #ffd166;
 }
 
-#custom-battery.critical {
+#custom-battery.critical,
+#custom-temperature.critical {
     color: #ff5555;
     background: rgba(255, 85, 85, 0.15);
     border-radius: 12px;
+}
+
+#custom-fan.high {
+    color: #ff5555;
+}
+
+#custom-fan.quiet {
+    color: #06d6a0;
 }
